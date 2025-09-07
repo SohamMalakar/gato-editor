@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import './App.css'
-import Menubar from './components/Menubar'
+import AppMenubar from './components/AppMenubar'
 import Viewport from './components/Viewport'
 import Sidebar from './components/Sidebar'
 
@@ -10,6 +10,21 @@ function App() {
 
   const [viewportWidth, setViewportWidth] = useState(80)
   const isResizing = useRef(false)
+
+  const handleClick = (event) => {
+    const text = event.currentTarget.dataset.action
+
+    switch (text) {
+      case "file-open":
+        handleOpen()
+        break
+
+      default:
+        break
+    }
+
+    console.log(`${text} clicked`)
+  }
 
   const handleMouseDown = () => {
     isResizing.current = true
@@ -32,7 +47,7 @@ function App() {
   }
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
       setImage(URL.createObjectURL(file))
     }
@@ -40,14 +55,11 @@ function App() {
 
   return (
     <div
-      className="flex flex-col min-h-screen"
+      className='flex flex-col min-h-screen'
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <div>
-        <Menubar onOpen={handleOpen} />
-      </div>
-
+      <AppMenubar handleClick={handleClick} />
       <input
         type="file"
         accept='image/*'
@@ -58,19 +70,19 @@ function App() {
 
       <div className="flex flex-grow overflow-hidden">
         <div
-          className="bg-zinc-900 text-zinc-100 flex items-center justify-center"
+          className="bg-neutral-900 text-neutral-100 flex items-center justify-center"
           style={{ width: `${viewportWidth}%` }}
         >
           <Viewport image={image} />
         </div>
 
         <div
-          className="w-2 bg-zinc-950 cursor-col-resize hover:bg-zinc-400"
+          className="w-2 bg-neutral-950 cursor-e-resize hover:bg-neutral-400"
           onMouseDown={handleMouseDown}
         />
 
         <div
-          className="bg-zinc-900 text-zinc-100 flex items-center justify-center"
+          className="bg-neutral-900 text-neutral-100 flex items-center justify-center"
           style={{ width: `${100 - viewportWidth}%` }}
         >
           <Sidebar />

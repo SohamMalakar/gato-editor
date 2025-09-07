@@ -11,7 +11,7 @@ function Viewport({ image }) {
           className='max-w-full max-h-full object-contain'
         />
       ) : (
-        <div className='select-none'>No image loaded</div>
+        <div className='text-neutral-100 select-none'>No image loaded</div>
       )}
     </div>
   )
