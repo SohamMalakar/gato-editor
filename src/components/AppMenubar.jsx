@@ -40,7 +40,7 @@ export default function AppMenubar({ handleClick }) {
                   <ChevronRightIcon />
                 </Menu.SubmenuTrigger>
                 <Menu.Portal>
-                  <Menu.Positioner sideOffset={6}>
+                  <Menu.Positioner sideOffset={-2}>
                     <Menu.Popup className="border border-neutral-100 rounded-md bg-neutral-900 text-neutral-100 shadow-lg">
                       <Menu.Item
                         onClick={handleClick}

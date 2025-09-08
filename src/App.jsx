@@ -9,7 +9,7 @@ function App() {
   const fileInputRef = useRef(null)
 
   const [viewportWidth, setViewportWidth] = useState(80)
-  const isResizing = useRef(false)
+  const [isResizing, setResizing] = useState(false)
 
   const handleClick = (event) => {
     const text = event.currentTarget.dataset.action
@@ -27,11 +27,12 @@ function App() {
   }
 
   const handleMouseDown = () => {
-    isResizing.current = true
+    setResizing(true)
+    document.body.style.cursor = "e-resize"
   }
 
   const handleMouseMove = (e) => {
-    if (!isResizing.current) return
+    if (!isResizing) return
     const newWidth = (e.clientX / window.innerWidth) * 100
     if (newWidth > 60 && newWidth < 90) {
       setViewportWidth(newWidth)
@@ -39,7 +40,8 @@ function App() {
   }
 
   const handleMouseUp = () => {
-    isResizing.current = false
+    setResizing(false)
+    document.body.style.cursor = "default"
   }
 
   const handleOpen = () => {
@@ -77,7 +79,7 @@ function App() {
         </div>
 
         <div
-          className="w-2 bg-neutral-950 cursor-e-resize hover:bg-neutral-400"
+          className={`w-2 ${isResizing ? "bg-neutral-400" : "bg-neutral-950"} cursor-e-resize hover:bg-neutral-400`}
           onMouseDown={handleMouseDown}
         />
 
