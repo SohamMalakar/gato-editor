@@ -79,7 +79,7 @@ function App() {
         </div>
 
         <div
-          className={`w-2 ${isResizing ? "bg-neutral-400" : "bg-neutral-950"} cursor-e-resize hover:bg-neutral-400`}
+          className={`w-2 ${isResizing ? "bg-neutral-500" : "bg-neutral-950"} cursor-e-resize ${isResizing || "hover:bg-neutral-400"}`}
           onMouseDown={handleMouseDown}
         />
 
