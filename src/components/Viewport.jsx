@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from 'react'
-import '../styles/Viewport.css'
 import { ContextMenu } from '@base-ui-components/react/context-menu';
 
 import { Canvas, Rect } from 'fabric'
@@ -59,7 +58,7 @@ const Viewport = forwardRef((props, ref) => {
       </ContextMenu.Trigger>
       <ContextMenu.Portal>
         <ContextMenu.Positioner>
-          <ContextMenu.Popup className="rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+          <ContextMenu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
             <ContextMenu.Item
               className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"
               onClick={handleClick}
