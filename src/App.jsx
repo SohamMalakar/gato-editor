@@ -57,7 +57,7 @@ function App() {
 
       <div className="flex flex-grow overflow-hidden">
 
-        <div className="bg-neutral-900 p-0.5">
+        <div className="bg-neutral-900 p-0.5 overflow-scroll">
           <Toolbar handleClick={handleClick} />
         </div>
 
@@ -74,7 +74,7 @@ function App() {
         />
 
         <div
-          className="bg-neutral-900 text-neutral-100 flex items-center justify-center overflow-scroll"
+          className="bg-neutral-900 text-neutral-100 flex overflow-scroll"
           style={{ width: `${100 - viewportWidth}%` }}
         >
           <Sidebar />

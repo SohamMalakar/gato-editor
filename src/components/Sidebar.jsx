@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 function Sidebar() {
   return (
-    <div>
-      <div className='text-neutral-100 select-none'></div>
+    <div className='p-2 text-neutral-100 select-none max-h-[calc(100vh-8rem)]'>
     </div>
   )
 }
