@@ -11,7 +11,7 @@ export default function AppMenubar({ handleClick }) {
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
               <Menu.Item
                 onClick={handleClick}
                 className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"
@@ -41,7 +41,7 @@ export default function AppMenubar({ handleClick }) {
                 </Menu.SubmenuTrigger>
                 <Menu.Portal>
                   <Menu.Positioner sideOffset={-2}>
-                    <Menu.Popup className="border border-neutral-100 rounded-md bg-neutral-900 text-neutral-100 shadow-lg">
+                    <Menu.Popup className="outline outline-neutral-700 rounded-md bg-neutral-900 text-neutral-100 shadow-lg">
                       <Menu.Item
                         onClick={handleClick}
                         className="flex rounded cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none"
@@ -61,7 +61,7 @@ export default function AppMenubar({ handleClick }) {
                 </Menu.Portal>
               </Menu.SubmenuRoot>
 
-              <Menu.Separator className="mx-4 my-1.5 h-px bg-neutral-100" />
+              <Menu.Separator className="mx-4 my-1.5 h-px bg-neutral-700" />
 
               <Menu.Item
                 onClick={handleClick}
@@ -80,7 +80,7 @@ export default function AppMenubar({ handleClick }) {
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
               <Menu.Item
                 onClick={handleClick}
                 className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"
@@ -129,7 +129,7 @@ export default function AppMenubar({ handleClick }) {
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
               <Menu.Item
                 onClick={handleClick}
                 className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"
@@ -162,7 +162,7 @@ export default function AppMenubar({ handleClick }) {
         </Menu.Trigger>
         <Menu.Portal>
           <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
               <Menu.Item
                 onClick={handleClick}
                 className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"

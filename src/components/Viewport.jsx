@@ -52,13 +52,13 @@ const Viewport = forwardRef((props, ref) => {
   return (
     <ContextMenu.Root>
       <ContextMenu.Trigger>
-        <div className="flex justify-center items-center max-h-[calc(100vh-8rem)]">
+        <div className="absolute inset-0 flex justify-center-safe items-center-safe">
           <canvas id="canvas" ref={canvasRef} />
         </div>
       </ContextMenu.Trigger>
       <ContextMenu.Portal>
         <ContextMenu.Positioner>
-          <ContextMenu.Popup className="border border-neutral-100 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
+          <ContextMenu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
             <ContextMenu.Item
               className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900"
               onClick={handleClick}
@@ -69,14 +69,14 @@ const Viewport = forwardRef((props, ref) => {
             <ContextMenu.Item className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900">
               Add to Playlist
             </ContextMenu.Item>
-            <ContextMenu.Separator className="mx-4 my-1.5 h-px bg-gray-200" />
+            <ContextMenu.Separator className="mx-4 my-1.5 h-px bg-neutral-700" />
             <ContextMenu.Item className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900">
               Play Next
             </ContextMenu.Item>
             <ContextMenu.Item className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900">
               Play Last
             </ContextMenu.Item>
-            <ContextMenu.Separator className="mx-4 my-1.5 h-px bg-gray-200" />
+            <ContextMenu.Separator className="mx-4 my-1.5 h-px bg-neutral-700" />
             <ContextMenu.Item className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900">
               Favorite
             </ContextMenu.Item>

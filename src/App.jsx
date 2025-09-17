@@ -62,14 +62,14 @@ function App() {
         </div>
 
         <div
-          className="bg-neutral-900 text-neutral-100 flex items-center justify-center overflow-scroll"
+          className="relative bg-neutral-900 text-neutral-100 overflow-scroll"
           style={{ width: `${viewportWidth}%` }}
         >
           <Viewport ref={viewportRef} handleClick={handleClick} />
         </div>
 
         <div
-          className={`w-1 bg-neutral-950 hover:bg-neutral-400 active:bg-neutral-500 cursor-e-resize`}
+          className="w-1 bg-neutral-950 hover:bg-neutral-400 active:bg-neutral-500 cursor-e-resize"
           onMouseDown={handleMouseDown}
         />
 
