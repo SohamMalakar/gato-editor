@@ -4,6 +4,7 @@ import AppMenubar from './components/AppMenubar'
 import Viewport from './components/Viewport'
 import Sidebar from './components/Sidebar'
 import Toolbar from './components/Toolbar'
+import Statusbar from './components/Statusbar'
 
 function App() {
   const viewportRef = useRef(null)
@@ -74,11 +75,15 @@ function App() {
         />
 
         <div
-          className="bg-neutral-900 text-neutral-100 flex overflow-scroll"
+          className="relative bg-neutral-900 text-neutral-100 flex overflow-scroll"
           style={{ width: `${100 - viewportWidth}%` }}
         >
           <Sidebar />
         </div>
+      </div>
+
+      <div className="flex bg-neutral-900">
+        <Statusbar />
       </div>
     </div>
   )
