@@ -1,5 +1,3 @@
-
-import * as React from 'react'
 import { FaLinux, FaPlaystation, FaXbox } from "react-icons/fa";
 
 function Toolbar({ handleClick }) {
