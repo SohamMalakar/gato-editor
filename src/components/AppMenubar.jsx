@@ -1,186 +1,138 @@
-import * as React from 'react'
-import { Menubar } from '@base-ui-components/react/menubar'
 import { Menu } from '@base-ui-components/react/menu'
+import { Menubar } from '@base-ui-components/react/menubar'
+
+import clsx from 'clsx'
+
+const triggerClass =
+  'h-8 rounded px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none cursor-pointer transition-all duration-200 ease-in-out'
+
+const itemClass =
+  'flex cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out'
+
+const popupClass =
+  'border border-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg overflow-hidden'
+
+function MenuItem({ action, children, handleClick, rounded }) {
+  return (
+    <Menu.Item
+      onClick={handleClick}
+      data-action={action}
+      className={clsx(itemClass, rounded)}
+    >
+      {children}
+    </Menu.Item>
+  )
+}
+
+function RenderMenuItems({ items, handleClick }) {
+  const rounded = (i) => i === 0 ? "rounded-b-md" : i === items.length - 1 ? "rounded-t-md" : "rounded-md"
+
+  return items.map((item, i) => {
+    if (item === 'separator') {
+      return (
+        <Menu.Separator
+          key={i}
+          className="mx-4 my-1.5 h-px bg-neutral-700"
+        />
+      )
+    }
+
+    if (item.submenu) {
+      return (
+        <Menu.SubmenuRoot key={item.label}>
+          <Menu.SubmenuTrigger className={clsx(itemClass, rounded(i))}>
+            {item.label}
+            <ChevronRightIcon />
+          </Menu.SubmenuTrigger>
+          <Menu.Portal>
+            <Menu.Positioner sideOffset={-2}>
+              <Menu.Popup className={popupClass}>
+                <RenderMenuItems
+                  items={item.submenu}
+                  handleClick={handleClick}
+                />
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu.SubmenuRoot>
+      )
+    }
+
+    return (
+      <MenuItem
+        key={item.action}
+        action={item.action}
+        handleClick={handleClick}
+        rounded={rounded(i)}
+      >
+        {item.label}
+      </MenuItem>
+    )
+  })
+}
+
+const menus = [
+  {
+    label: 'File',
+    items: [
+      { action: 'file-new', label: 'New' },
+      { action: 'file-open', label: 'Open' },
+      {
+        label: 'Export',
+        submenu: [
+          { action: 'file-export-pdf', label: 'PDF' },
+          {
+            label: 'Images',
+            submenu: [
+              { action: 'file-export-png', label: 'PNG' },
+              { action: 'file-export-jpg', label: 'JPG' },
+              {
+                label: 'Vector',
+                submenu: [
+                  { action: 'file-export-svg', label: 'SVG' },
+                  { action: 'file-export-eps', label: 'EPS' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      'separator',
+      { action: 'file-print', label: 'Print' },
+    ],
+  },
+  {
+    label: 'Edit',
+    items: [
+      { action: 'edit-undo', label: 'Undo' },
+      { action: 'edit-redo', label: 'Redo' },
+      { action: 'edit-cut', label: 'Cut' },
+      { action: 'edit-copy', label: 'Copy' },
+      { action: 'edit-paste', label: 'Paste' },
+    ],
+  },
+]
 
 export default function AppMenubar({ handleClick }) {
   return (
     <Menubar className="flex bg-neutral-900 p-0.5">
-      <Menu.Root>
-        <Menu.Trigger className="h-8 rounded px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none cursor-pointer transition-all duration-200 ease-in-out">
-          File
-        </Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="file-new"
-              >
-                New
-              </Menu.Item>
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="file-open"
-              >
-                Open
-              </Menu.Item>
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="file-save"
-              >
-                Save
-              </Menu.Item>
-
-              <Menu.SubmenuRoot>
-                <Menu.SubmenuTrigger className="flex rounded cursor-pointer w-full items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:text-neutral-900 hover:bg-neutral-100 transition-all duration-200 ease-in-out">
-                  Export
-                  <ChevronRightIcon />
-                </Menu.SubmenuTrigger>
-                <Menu.Portal>
-                  <Menu.Positioner sideOffset={-2}>
-                    <Menu.Popup className="outline outline-neutral-700 rounded-md bg-neutral-900 text-neutral-100 shadow-lg">
-                      <Menu.Item
-                        onClick={handleClick}
-                        className="flex rounded cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none transition-all duration-200 ease-in-out"
-                        data-action="file-export-pdf"
-                      >
-                        PDF
-                      </Menu.Item>
-                      <Menu.Item
-                        onClick={handleClick}
-                        className="flex rounded cursor-pointer hover:bg-neutral-100 hover:text-neutral-900 items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none transition-all duration-200 ease-in-out"
-                        data-action="file-export-png"
-                      >
-                        PNG
-                      </Menu.Item>
-                    </Menu.Popup>
-                  </Menu.Positioner>
-                </Menu.Portal>
-              </Menu.SubmenuRoot>
-
-              <Menu.Separator className="mx-4 my-1.5 h-px bg-neutral-700" />
-
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="file-print"
-              >
-                Print
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
-      <Menu.Root>
-        <Menu.Trigger className="h-8 rounded cursor-pointer px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none transition-all duration-200 ease-in-out">
-          Edit
-        </Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="edit-undo"
-              >
-                Undo
-              </Menu.Item>
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="edit-redo"
-              >
-                Redo
-              </Menu.Item>
-
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="edit-cut"
-              >
-                Cut
-              </Menu.Item>
-
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="edit-copy"
-              >
-                Copy
-              </Menu.Item>
-
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="edit-paste"
-              >
-                Paste
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
-      <Menu.Root>
-        <Menu.Trigger className="h-8 rounded cursor-pointer px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none transition-all duration-200 ease-in-out">
-          View
-        </Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="view-zoom_in"
-              >
-                Zoom In
-              </Menu.Item>
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="view-zoom_out"
-              >
-                Zoom Out
-              </Menu.Item>
-
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="view-fullscreen"
-              >
-                Fullscreen
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
-      <Menu.Root>
-        <Menu.Trigger className="h-8 rounded cursor-pointer px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none transition-all duration-200 ease-in-out">
-          Help
-        </Menu.Trigger>
-        <Menu.Portal>
-          <Menu.Positioner sideOffset={6}>
-            <Menu.Popup className="outline outline-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg">
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="help-doc"
-              >
-                Documentation
-              </Menu.Item>
-              <Menu.Item
-                onClick={handleClick}
-                className="flex rounded cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out"
-                data-action="help-about"
-              >
-                About
-              </Menu.Item>
-            </Menu.Popup>
-          </Menu.Positioner>
-        </Menu.Portal>
-      </Menu.Root>
+      {menus.map((menu) => (
+        <Menu.Root key={menu.label}>
+          <Menu.Trigger className={triggerClass}>
+            {menu.label}
+          </Menu.Trigger>
+          <Menu.Portal>
+            <Menu.Positioner sideOffset={6}>
+              <Menu.Popup className={popupClass}>
+                <RenderMenuItems
+                  items={menu.items}
+                  handleClick={handleClick}
+                />
+              </Menu.Popup>
+            </Menu.Positioner>
+          </Menu.Portal>
+        </Menu.Root>
+      ))}
     </Menubar>
   )
 }
