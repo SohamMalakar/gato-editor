@@ -8,7 +8,7 @@ const itemClass =
   'flex cursor-pointer rounded items-center justify-between gap-4 px-4 py-2 m-0.5 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 data-[popup-open]:bg-neutral-100 data-[popup-open]:text-neutral-900 transition-all duration-200 ease-in-out'
 
 const popupClass =
-  'border border-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg'
+  'border border-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg transition-[transform,scale,opacity] data-[ending-style]:scale-90 data-[ending-style]:opacity-0 data-[starting-style]:scale-90 data-[starting-style]:opacity-0'
 
 function MenuItem({ action, children, handleClick }) {
   return (
