@@ -1,23 +1,21 @@
 import { Menu } from '@base-ui-components/react/menu'
 import { Menubar } from '@base-ui-components/react/menubar'
 
-import clsx from 'clsx'
-
 const triggerClass =
-  'h-8 rounded px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 select-none cursor-pointer transition-all duration-200 ease-in-out'
+  'h-8 rounded px-3 text-sm font-medium text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 data-[popup-open]:bg-neutral-100 data-[popup-open]:text-neutral-900 select-none cursor-pointer transition-all duration-200 ease-in-out'
 
 const itemClass =
-  'flex cursor-pointer items-center justify-between gap-4 px-4 py-2 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 transition-all duration-200 ease-in-out'
+  'flex cursor-pointer rounded items-center justify-between gap-4 px-4 py-2 m-0.5 text-sm leading-4 select-none hover:bg-neutral-100 hover:text-neutral-900 data-[popup-open]:bg-neutral-100 data-[popup-open]:text-neutral-900 transition-all duration-200 ease-in-out'
 
 const popupClass =
-  'border border-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg overflow-hidden'
+  'border border-neutral-700 rounded-md text-neutral-100 bg-neutral-900 shadow-lg'
 
-function MenuItem({ action, children, handleClick, rounded }) {
+function MenuItem({ action, children, handleClick }) {
   return (
     <Menu.Item
       onClick={handleClick}
       data-action={action}
-      className={clsx(itemClass, rounded)}
+      className={itemClass}
     >
       {children}
     </Menu.Item>
@@ -25,8 +23,6 @@ function MenuItem({ action, children, handleClick, rounded }) {
 }
 
 function RenderMenuItems({ items, handleClick }) {
-  const rounded = (i) => i === 0 ? "rounded-b-md" : i === items.length - 1 ? "rounded-t-md" : "rounded-md"
-
   return items.map((item, i) => {
     if (item === 'separator') {
       return (
@@ -40,7 +36,7 @@ function RenderMenuItems({ items, handleClick }) {
     if (item.submenu) {
       return (
         <Menu.SubmenuRoot key={item.label}>
-          <Menu.SubmenuTrigger className={clsx(itemClass, rounded(i))}>
+          <Menu.SubmenuTrigger className={itemClass}>
             {item.label}
             <ChevronRightIcon />
           </Menu.SubmenuTrigger>
@@ -63,7 +59,6 @@ function RenderMenuItems({ items, handleClick }) {
         key={item.action}
         action={item.action}
         handleClick={handleClick}
-        rounded={rounded(i)}
       >
         {item.label}
       </MenuItem>
