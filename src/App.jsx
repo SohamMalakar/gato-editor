@@ -12,6 +12,8 @@ function App() {
   const [viewportWidth, setViewportWidth] = useState(80)
   const [isResizing, setResizing] = useState(false)
 
+  const [statusbarText, setStatusbarText] = useState("")
+
   const handleClick = (event) => {
     const text = event.currentTarget.dataset.action
 
@@ -25,6 +27,8 @@ function App() {
       default:
         break
     }
+
+    setStatusbarText(`${text} clicked`)
 
     console.log(`${text} clicked`)
   }
@@ -83,7 +87,7 @@ function App() {
       </div>
 
       <div className="flex bg-neutral-900">
-        <Statusbar />
+        <Statusbar text={statusbarText} />
       </div>
     </div>
   )
